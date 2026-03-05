@@ -47,4 +47,4 @@ Installation
 
     go run cmd/api/main.go
 
-    Use code with caution.
+Use code with caution.
