@@ -1,5 +1,6 @@
 Cloud Feona ☁️✨
 Cloud Feona is a high-performance AI search aggregator written in Go. It leverages Go's lightweight concurrency (Goroutines) to fetch, parse, and synthesise search results from multiple providers simultaneously using Large Language Models (LLMs).
+
 🚀 Features
 
     Concurrent Retrieval: Uses Goroutines to query multiple search engines (Google, Tavily, Bing) in parallel for ultra-low latency.
