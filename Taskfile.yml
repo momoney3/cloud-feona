@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
 
-version: '3'
+version: "3"
 
 vars:
-  GREETING: Hello, world!
+  GREETING: "Generateing gRPC code"
 
 tasks:
   default:
@@ -11,3 +11,12 @@ tasks:
     cmds:
       - echo "{{.GREETING}}"
     silent: true
+
+  build_proto:
+    desc: "Generate Go code from protobuf definitions"
+    cmds:
+      - |
+        protoc --proto_path=proto/ai \
+              --go_out=./proto/ai --go_opt=paths=source_relative \
+              --go-grpc_out=./proto/ai --go-grpc_opt=paths=source_relative \
+              ai.proto
