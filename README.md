@@ -24,27 +24,21 @@ Prerequisites
 Installation
 
     Clone the Source
-    bash
 
     git clone https://github.com
     cd cloud-feona
 
     Use code with caution.
     Install Dependencies
-    bash
 
     go mod tidy
 
-    Use code with caution.
     Configure Environment
-    bash
 
     export OPENAI_API_KEY="your-key"
     export SEARCH_API_KEY="your-key"
 
-    Use code with caution.
     Run the Server
-    bash
 
     go run cmd/api/main.go
 

@@ -1,7 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"github.com/google/generative-ai-go/genai"
+	"google.golang.org/genai"
+)
+
+const GenaiModel = "gemini-1.5-flash"
+
+type App struct {
+	client *genai.Client
+	model  *genai.GenerativeModel
+	cs     *genai.ChatSession
+}
 
 func main() {
-	fmt.Println("Hello to the world")
+	// err = godotenv.Load()
 }
