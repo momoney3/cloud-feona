@@ -29,5 +29,5 @@ go.work.sum
 .envrc
 
 # Editor/IDE
-# .idea/
-# .vscode/
+ .idea/
+ .vscode/
