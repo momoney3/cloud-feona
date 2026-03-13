@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package rag;
+
+option go_package= "cloud-feona/proto";
+
+service RagService {
+  rpc Ask(AskRequest) returns (stream AskResponse);
+}
+
+message  AskRequest {
+  string question = 1;
+}
+
+message AskResponse {
+  string token = 1;
+}
+

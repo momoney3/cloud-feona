@@ -11,10 +11,56 @@ tasks:
     silent: true
 
   build_proto:
-    desc: "Generate Go code from protobuf definitions"
+    desc: Generate Go code from protobuf definitions
     cmds:
       - |
-        protoc --proto_path=proto/ai \
-              --go_out=./proto/ai --go_opt=paths=source_relative \
-              --go-grpc_out=./proto/ai --go-grpc_opt=paths=source_relative \
-              ai.proto
+        protoc --proto_path=proto \
+              --go_out=./proto/ --go_opt=paths=source_relative \
+              --go-grpc_out=./proto/ --go-grpc_opt=paths=source_relative \
+              rag.proto
+
+  tidy:
+    desc: Synchronise dependencies (adds missing, removes unused)
+    cmds:
+      - go mod tidy
+      - go mod verify
+
+  update:
+    desc: Upgrade all dependencies to latest minor/patch versions
+    cmds:
+      - go get -u ./...
+      - task: tidy
+
+  format:
+    desc: Reformat code and run static analysis
+    cmds:
+      - go fmt ./...
+      - go vet ./...
+
+  clean-all:
+    desc: Deep clean the local module cache (use with caution)
+    summary: |
+      This removes the entire local module cache. 
+      The next build will re-download everything.
+    cmds:
+      - go clean -modcache
+      - task: tidy
+
+  fix:
+    desc: Run a complete project "health check" and cleanup
+    deps: [format, tidy]
+    cmds:
+      - echo "Project cleaned and verified!"
+
+  lint:
+    desc: Run idiomatic Go linter (catches 50+ common issues)
+    cmds:
+      - golangci-lint run ./...
+
+  security:
+    desc: Run comprehensive security scans (CVEs and code patterns)
+    cmds:
+      - echo "Checking for known vulnerabilities in dependencies..."
+      - govulncheck ./...
+      - echo "Scanning source code for security weaknesses..."
+      - gosec ./...
