@@ -14,7 +14,7 @@ tasks:
     desc: "Generate Go code from protobuf definitions"
     cmds:
       - |
-        protoc --proto_path=proto/ai \
-              --go_out=./proto/ai --go_opt=paths=source_relative \
-              --go-grpc_out=./proto/ai --go-grpc_opt=paths=source_relative \
-              ai.proto
+        protoc --proto_path=proto \
+              --go_out=./proto/ --go_opt=paths=source_relative \
+              --go-grpc_out=./proto/ --go-grpc_opt=paths=source_relative \
+              rag.proto

@@ -1,18 +1,28 @@
 package main
 
 import (
-	"github.com/google/generative-ai-go/genai"
-	"google.golang.org/genai"
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"net/http"
 )
 
-const GenaiModel = "gemini-1.5-flash"
-
-type App struct {
-	client *genai.Client
-	model  *genai.GenerativeModel
-	cs     *genai.ChatSession
-}
-
 func main() {
-	// err = godotenv.Load()
+	body := map[string]any{
+		"model": "llama3",
+		"promt": "Explain kubernetes simply",
+	}
+	b, _ := json.Marshal(body)
+	resp, _ := http.Post(
+		"http://localhost:11434/api/generate",
+		"application/json",
+		bytes.NewReader(b),
+	)
+	defer resp.Body.Close()
+
+	var r map[string]any
+
+	json.NewDecoder(resp.Body).Decode(&r)
+
+	fmt.Println("response")
 }
